@@ -1,0 +1,69 @@
+.team {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-7);
+}
+
+.roster {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: var(--border);
+  text-align: left;
+}
+
+.roster th,
+.roster td {
+  padding: var(--space-3) var(--space-4) var(--space-3) 0;
+  vertical-align: baseline;
+  font-weight: 400;
+}
+
+.roster thead th {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.roster tr {
+  border-bottom: var(--border);
+}
+
+/* Placeholder values are muted and italic so they read as unfilled. */
+.roster tbody th,
+.roster tbody td {
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* Small screens: stack each roster row, labeling every value. */
+@media (max-width: 39.99rem) {
+  .roster thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .roster tr {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-3);
+  }
+
+  .roster tbody th,
+  .roster tbody td {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: 0;
+  }
+
+  .roster tbody th::before,
+  .roster tbody td::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-style: normal;
+  }
+}

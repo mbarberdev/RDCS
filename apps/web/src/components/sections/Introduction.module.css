@@ -1,0 +1,48 @@
+.intro {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-8) var(--space-7);
+}
+
+/* A short amber rule is the page's single decorative accent. */
+.heading {
+  font-size: var(--text-display);
+  font-weight: 600;
+}
+
+.heading::before {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin-bottom: var(--space-5);
+  background: var(--color-accent);
+}
+
+.details {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.sponsorship {
+  color: var(--color-text-muted);
+}
+
+.description {
+  max-width: var(--measure);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+/* Wide screens: the description sits on the content column shared by the
+   sections below, with the sponsorship line in the label column. */
+@media (min-width: 48rem) {
+  .intro {
+    padding-block: var(--space-9) var(--space-8);
+  }
+
+  .details {
+    grid-template-columns: var(--label-column) minmax(0, 1fr);
+    column-gap: var(--column-gap);
+  }
+}

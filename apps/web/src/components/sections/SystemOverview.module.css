@@ -1,0 +1,41 @@
+.system {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-7) var(--space-8);
+}
+
+/* Four aligned columns on wide screens; separated by spacing and a single
+   rule above the row rather than boxed individually. */
+.entries {
+  display: grid;
+  gap: var(--space-5) var(--column-gap);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+  list-style: none;
+}
+
+.entry {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.name {
+  font-size: var(--text-xl);
+}
+
+@media (min-width: 40rem) {
+  .entries {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .system {
+    padding-block: var(--space-8) var(--space-9);
+  }
+
+  .entries {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

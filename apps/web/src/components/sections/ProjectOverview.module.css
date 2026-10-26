@@ -1,0 +1,24 @@
+.project {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-7);
+}
+
+.content {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.purpose {
+  max-width: var(--measure);
+}
+
+/* Heading in the label column, content on the shared content column. */
+@media (min-width: 48rem) {
+  .project {
+    grid-template-columns: var(--label-column) minmax(0, 1fr);
+    column-gap: var(--column-gap);
+    padding-block: var(--space-8);
+  }
+}

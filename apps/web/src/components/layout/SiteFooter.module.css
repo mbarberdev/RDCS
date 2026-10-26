@@ -1,0 +1,15 @@
+.footer {
+  background: var(--color-surface);
+  border-top: var(--border);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-6);
+  font-size: var(--text-sm);
+}
+
+.disclaimer {
+  color: var(--color-text-muted);
+}
