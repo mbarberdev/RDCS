@@ -1,0 +1,41 @@
+.intro {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-8) var(--space-7);
+}
+
+.heading {
+  font-size: var(--text-display);
+  font-weight: 700;
+}
+
+.summary {
+  max-width: var(--measure);
+  font-size: var(--text-xl);
+  line-height: 1.35;
+}
+
+.context {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--measure);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 48rem) {
+  .intro {
+    padding-block: var(--space-9) var(--space-8);
+  }
+}
+
+/* Same two columns as "How it works" below. */
+@media (min-width: 60rem) {
+  .intro {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
+    gap: var(--space-6) var(--space-8);
+  }
+
+  .heading {
+    grid-column: 1 / -1;
+  }
+}

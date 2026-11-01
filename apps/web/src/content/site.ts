@@ -1,109 +1,113 @@
-// Public copy for the RDCS landing page.
+// Public copy for the RDCS landing page, kept apart from layout so wording can
+// be reviewed on its own.
 //
-// Everything a visitor reads lives here so that wording can be reviewed and
-// approved without touching layout code.
+// Content rules for editors:
+// - The project's stage is explained once, in `progress`. Elsewhere, write
+//   plainly, but don't state an untested capability as demonstrated fact.
+// - Leave out numeric requirements (net size, drone speed, ranges) until the
+//   team confirms them; the source documents disagree on several.
+// - No contact details, Drive links, budgets, or photos.
 
-export type SectionLink = {
-  id: string;
-  label: string;
-};
-
-export const sections = {
-  project: { id: "project", label: "Project" },
-  system: { id: "system", label: "System" },
-  // Not yet published: add to `navItems` and render in app/page.tsx once
-  // approved content replaces the placeholders below.
-  team: { id: "team", label: "Team" },
-  milestones: { id: "milestones", label: "Milestones" },
-} as const satisfies Record<string, SectionLink>;
-
-export const navItems: SectionLink[] = [sections.project, sections.system];
-
-export const identity = {
+export const intro = {
   acronym: "RDCS",
   name: "Rapid Drone Capture System",
-  institution: "Stevens Institute of Technology",
-  sponsor: "General Dynamics Mission Systems",
+  summary:
+    "RDCS is a portable, ground-based system that tracks a small drone with a camera and computer vision, turns a launcher to face it, and deploys a tethered net to catch it.",
+  affiliation:
+    "We are six engineering students at Stevens Institute of Technology building a prototype as our 2026–2027 senior design project, sponsored by General Dynamics Mission Systems.",
+  problem:
+    "Small drones are inexpensive, agile, and fly low. They can appear with little warning and change direction quickly, which makes them hard to follow by eye, and capture methods that rely on an operator’s reaction time and aim leave little room for error. We want sensors to do the tracking and pointing instead.",
 };
 
-export const introduction = {
-  sponsorship:
-    "A Stevens Institute of Technology senior design project, sponsored by General Dynamics Mission Systems.",
-  description:
-    "RDCS is a system for detecting, tracking, and capturing a drone with a net. The prototype is under development for controlled testing.",
-};
-
-export const overview = {
-  purpose:
-    "The project's goal is to integrate sensing, perception, positioning, and net capture into one working prototype, and to evaluate how those parts perform together.",
-  rows: [
-    { label: "Institution", value: "Stevens Institute of Technology" },
-    { label: "Sponsor", value: "General Dynamics Mission Systems" },
-    { label: "Project type", value: "Undergraduate senior design" },
-    { label: "Focus", value: "Prototype design, integration, and testing" },
+export const howItWorks = {
+  id: "how-it-works",
+  title: "How it works",
+  steps: [
+    {
+      title: "Find the drone",
+      body: "An optical camera feeds an onboard computer, an NVIDIA Jetson Orin NX in our current architecture, which locates the drone and follows its position. We’ll evaluate a pretrained YOLO vision model for detection reliability and processing delay, and we’re still choosing a second sensor.",
+    },
+    {
+      title: "Turn toward it",
+      body: "Battery-powered stepper motors drive a two-axis pan-and-tilt assembly on a stationary, tripod-style base. Turning from a fixed position lets the launcher face a target from different directions, where a barrier would have to be moved across the area to cover the same ground. The structure is designed in steel, with a prototype in carbon-fiber-reinforced nylon.",
+    },
+    {
+      title: "Deploy the net",
+      body: "A pneumatic launcher sends a flexible net toward the drone, and we want it to deploy the same way every time. The net stays tethered so that it remains connected to the system along with whatever it catches. Multiple barrels in a modular launcher are meant to allow a second attempt after a miss.",
+    },
+    {
+      title: "Recover and reset",
+      body: "We recover the net by hand and reset the system for the next run.",
+    },
   ],
+  safetyTitle: "Running it safely",
+  safety:
+    "Safety comes before performance. Operators will stay outside the test area and use a remote interface, proposed over Wi-Fi and WebSockets, that shows readiness, operating status, and faults. The design includes a physical interlock backed by a safety relay, and testing is limited to a designated lightweight test drone in a defined area.",
+  stretch:
+    "If time allows, we’d also like RDCS to run without step-by-step operator input and to tell drones from birds. Both are stretch goals.",
+  diagram: {
+    description:
+      "Side view of the concept: a launcher with several barrels on a pan-and-tilt assembly, mounted on a tripod-style base, sending a tethered net toward a test drone.",
+    caption: "Concept sketch. Not to scale, and not final hardware.",
+  },
 };
 
-export type SystemEntry = {
-  name: string;
-  function: string;
+// Only documented disciplines, experience, and project contributions. No
+// photos, titles, contact details, or social links.
+export const team = {
+  id: "team",
+  title: "Team",
+  members: [
+    {
+      name: "Max Barber",
+      discipline: "Software Engineering",
+      bio: "Software architecture, detection research, system flow, and this website. Background in AI/ML systems, IT, and full-stack development.",
+    },
+    {
+      name: "Joseph “Joey” Morsillo",
+      discipline: "Electrical Engineering",
+      bio: "Electrical architecture and power analysis. Background in embedded and control systems, with an internship at Thorlabs.",
+    },
+    {
+      name: "Noah Golan",
+      discipline: "Mechanical Engineering",
+      bio: "Motor calculations, motor mounts, and the pan-and-tilt design. Design and analysis experience as a General Dynamics Mission Systems intern.",
+    },
+    {
+      name: "Rene Bieluch",
+      discipline: "Mechanical Engineering",
+      bio: "The base, support structure, and preliminary structural analysis. Design and finite element analysis experience in R&D at Getinge.",
+    },
+    {
+      name: "Ansh Razdan",
+      discipline: "Mechanical Engineering",
+      bio: "Launcher CAD and mechanical analysis. Simulation and navigation experience at Kearfott.",
+    },
+    {
+      name: "Jeylan Jubran",
+      discipline: "Industrial & Systems Engineering",
+      bio: "Reports, presentations, and project communication. Background in maintenance and continuous improvement consulting.",
+    },
+  ],
+  advisor: "Our faculty advisor is Professor Kishore Pochiraju.",
 };
 
-export const systemEntries: SystemEntry[] = [
-  {
-    name: "Sensing",
-    function: "Observes the test area and supplies data to the rest of the system.",
+export const progress = {
+  id: "progress",
+  title: "Progress",
+  paragraphs: [
+    "We’ve finished our research and selected the concept described above, and we’re now designing the subsystems. We presented our mechanical design choices in October 2026 and are working through motor sizing and mounts.",
+    "Next come simulation and isolated subsystem tests, then integration into one prototype and testing against the test drone. Nothing has been tested as an integrated system yet, so this page describes what we’re designing rather than demonstrated performance.",
+  ],
+  goal: {
+    date: "May 2027",
+    label: "Our goal is to demonstrate the integrated prototype at the Stevens Innovation Expo.",
   },
-  {
-    name: "Perception",
-    function: "Detects a drone in that data and tracks its position over time.",
-  },
-  {
-    name: "Positioning",
-    function: "Aims the capture mechanism using the tracked position.",
-  },
-  {
-    name: "Net Capture",
-    function: "Deploys a net to capture the drone.",
-  },
-];
-
-// --- Unpublished placeholder content -------------------------------------
-// Used by the Team and Milestones components, which are not rendered yet.
-// Replace with approved content; do not fill with guessed names or dates.
-
-export type RosterEntry = {
-  name: string;
-  role: string;
-  focus: string;
 };
 
-export const roster: RosterEntry[] = Array.from({ length: 4 }, () => ({
-  name: "Name pending approval",
-  role: "Role pending approval",
-  focus: "Focus area pending approval",
-}));
-
-export type Milestone = {
-  title: string;
-  date: string;
-  status: string;
-};
-
-export const milestones: Milestone[] = [
-  "Project start",
-  "Design review",
-  "Prototype integration",
-  "Controlled testing",
-  "Final presentation",
-].map((title) => ({
-  title,
-  date: "Date pending",
-  status: "Not yet reported",
-}));
+export const navItems = [howItWorks, team, progress];
 
 export const footer = {
-  identification:
-    "RDCS is a senior design project at Stevens Institute of Technology, sponsored by General Dynamics Mission Systems.",
+  identification: "Rapid Drone Capture System, a Stevens Institute of Technology senior design project.",
   disclaimer: "This is not an official General Dynamics Mission Systems website.",
 };
