@@ -1,0 +1,55 @@
+.section {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.text {
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--measure);
+}
+
+.steps,
+.safety {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.steps h3 {
+  margin-bottom: var(--space-2);
+}
+
+.safety {
+  gap: var(--space-3);
+  padding-top: var(--space-6);
+  border-top: var(--border);
+}
+
+.figure {
+  min-width: 0;
+}
+
+.figure figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Wide screens: the sketch stays in view while the steps scroll past it. */
+@media (min-width: 60rem) {
+  .section {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
+    grid-template-rows: auto 1fr;
+    gap: var(--space-6) var(--space-8);
+    padding-block-end: var(--space-9);
+  }
+
+  .figure {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--masthead-height) + var(--space-6));
+  }
+}

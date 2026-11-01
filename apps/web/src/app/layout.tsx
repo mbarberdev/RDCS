@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Barlow_Condensed, IBM_Plex_Mono, Source_Sans_3 } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Barlow_Condensed, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
@@ -14,16 +14,16 @@ const sourceSans = Source_Sans_3({
   subsets: ["latin"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: "400",
-});
-
 export const metadata: Metadata = {
   title: "RDCS | Rapid Drone Capture System",
   description:
-    "RDCS is a Stevens Institute of Technology senior design project sponsored by General Dynamics Mission Systems: a prototype under development for controlled testing.",
+    "RDCS is a Stevens Institute of Technology senior design project sponsored by General Dynamics Mission Systems: a ground-based system that tracks a small drone and deploys a tethered net to catch it.",
+};
+
+// Next 16 takes theme color from `viewport`, not `metadata`. Matches --color-bg.
+export const viewport: Viewport = {
+  themeColor: "#0c1424",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${barlowCondensed.variable} ${sourceSans.variable} ${plexMono.variable}`}
+      className={`${barlowCondensed.variable} ${sourceSans.variable}`}
     >
       <body>
         <a className="skip-link" href="#main">

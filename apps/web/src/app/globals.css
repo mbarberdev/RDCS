@@ -1,29 +1,29 @@
 /* ---------------------------------------------------------------------------
    Design tokens
-   Instrument-panel palette: flat, matte surfaces with a restrained amber
-   accent. Font families come from next/font variables set in layout.tsx.
+   Navy and slate palette with one restrained cool accent. Font families come
+   from next/font variables set in layout.tsx.
    --------------------------------------------------------------------------- */
 
 :root {
-  /* Color */
-  --color-bg: #151719;
-  --color-surface: #1c1f22;
-  --color-text: #e8e6df;
-  --color-text-muted: #a5a8aa;
-  --color-accent: #dcaa55;
-  --color-border: #3a3e42;
+  /* Color (text colors meet WCAG AA on both --color-bg and --color-surface) */
+  --color-bg: #0c1424;
+  --color-surface: #111b2e;
+  --color-text: #eef1f6;
+  --color-text-muted: #9ba8bd;
+  --color-accent: #7fb8e0;
+  --color-border: #263552;
+  --color-border-strong: #3a4b6b;
 
   /* Type families */
   --font-heading: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
   --font-body: var(--font-source-sans), "Segoe UI", Arial, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, Consolas, monospace;
 
   /* Type scale */
   --text-sm: 0.9375rem;
   --text-base: 1.0625rem;
-  --text-lg: 1.25rem;
+  --text-lg: 1.375rem;
   --text-xl: 1.625rem;
-  --text-2xl: 2.25rem;
+  --text-2xl: clamp(2rem, 1.6rem + 1.6vw, 2.75rem);
   --text-display: clamp(2.75rem, 1.9rem + 3.6vw, 4.75rem);
   --leading-tight: 1.05;
   --leading-body: 1.6;
@@ -42,25 +42,18 @@
   /* Borders */
   --border-width: 1px;
   --border: var(--border-width) solid var(--color-border);
-  --border-placeholder: var(--border-width) dashed var(--color-border);
   --focus-ring: 2px solid var(--color-accent);
 
   /* Layout */
-  --content-max: 70rem;
-  --label-column: 14rem;
-  --column-gap: var(--space-6);
+  --content-max: 66rem;
   --gutter: var(--space-4);
   --measure: 36rem;
-  --masthead-bar: 3.25rem;
-  --masthead-nav: 2.75rem;
-  /* Height of the sticky masthead; small screens add a nav row. */
-  --sticky-offset: calc(var(--masthead-bar) + var(--masthead-nav));
+  --masthead-height: 3.25rem;
 }
 
 @media (min-width: 48rem) {
   :root {
     --gutter: var(--space-6);
-    --sticky-offset: var(--masthead-bar);
   }
 }
 
@@ -79,7 +72,7 @@
 html {
   color-scheme: dark;
   /* Keep anchored headings clear of the sticky masthead. */
-  scroll-padding-top: calc(var(--sticky-offset) + var(--space-6));
+  scroll-padding-top: calc(var(--masthead-height) + var(--space-6));
   -webkit-text-size-adjust: 100%;
 }
 
@@ -109,10 +102,23 @@ h3 {
   line-height: var(--leading-tight);
 }
 
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
 a {
   color: inherit;
-  text-decoration-color: var(--color-border);
+  text-decoration-color: var(--color-border-strong);
   text-underline-offset: 0.2em;
+}
+
+ul,
+ol {
+  list-style: none;
 }
 
 :focus-visible {
@@ -160,13 +166,4 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
 }
