@@ -6,7 +6,8 @@
 //   plainly, but don't state an untested capability as demonstrated fact.
 // - Leave out numeric requirements (net size, drone speed, ranges) until the
 //   team confirms them; the source documents disagree on several.
-// - No contact details, Drive links, budgets, or photos.
+// - No contact details, Drive links, or budgets. Photos only in progress
+//   updates, from team tests.
 
 export const intro = {
   acronym: "RDCS",
@@ -25,7 +26,7 @@ export const howItWorks = {
   steps: [
     {
       title: "Find the drone",
-      body: "An optical camera feeds an onboard computer, an NVIDIA Jetson Orin NX in our current architecture, which locates the drone and follows its position. We’ll evaluate a pretrained YOLO vision model for detection reliability and processing delay, and we’re still choosing a second sensor.",
+      body: "An optical camera feeds an onboard computer, an NVIDIA Jetson Orin NX in our current architecture, which locates the drone and follows its position. We’ve begun testing a pretrained YOLO vision model for detection reliability and processing delay (see Progress), and we’re still choosing a second sensor.",
     },
     {
       title: "Turn toward it",
@@ -97,8 +98,32 @@ export const progress = {
   title: "Progress",
   paragraphs: [
     "We’ve finished our research and selected the concept described above, and we’re now designing the subsystems. We presented our mechanical design choices in October 2026 and are working through motor sizing and mounts.",
-    "Next come simulation and isolated subsystem tests, then integration into one prototype and testing against the test drone. Nothing has been tested as an integrated system yet, so this page describes what we’re designing rather than demonstrated performance.",
+    "Next come simulation and more isolated subsystem tests, then integration into one prototype and testing against the test drone. Nothing has been tested as an integrated system yet, so this page describes what we’re designing rather than demonstrated performance.",
   ],
+  update: {
+    date: "November 5, 2026",
+    title: "First vision test",
+    body: [
+      "We took the camera to the drone lab for an initial YOLO detection test, using only the visual camera. It went well: the model picked up the drone in under a second and tracked it with moderate confidence.",
+      "This was a pretrained YOLO11 drone-detection model, run on a laptop with little training on our part. Since a lightly trained model already performed this well, we expect a better-trained model running on the Jetson to do considerably better, well within our 5-second window for confirming a detection.",
+    ],
+    images: [
+      {
+        src: "/progress/yolo-flight.jpg",
+        width: 1300,
+        height: 730,
+        alt: "Camera view of the netted drone lab with a blue box labeled drone 0.61 around a small drone in flight near the floor, and two lower-confidence boxes elsewhere in the frame.",
+        caption: "Tracking the drone in flight. The two lower-scoring boxes are false detections.",
+      },
+      {
+        src: "/progress/yolo-handheld.jpg",
+        width: 1200,
+        height: 900,
+        alt: "A team member holds a drone up in front of a whiteboard while the model draws a box around it labeled drone 0.66.",
+        caption: "Detecting a hand-held drone.",
+      },
+    ],
+  },
   goal: {
     date: "May 2027",
     label: "Our goal is to demonstrate the integrated prototype at the Stevens Innovation Expo.",
